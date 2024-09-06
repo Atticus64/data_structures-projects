@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite App</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+  </head>
+  <body>
+    <section id="app">
+      <h1>App Busqueda Binaria</h1>
+      <section class="menu">
+        <form class="form">
+            <label for="numSearch">Número a buscar: </label>
+            <div>
+              <button class=".editVal minus" type="button">-</button>
+              <input name="number" id="numSearch" type="number" class="input my-input" value="1">
+              <button class=".editVal plus" type="button">+</button>
+            </div>
+            <button type="submit" class="btn">Buscar</button>
+        </form>
+        <div class="numbers-card">
+    <canvas class=".canvas"></canvas>
+        </div>
+      </section>
+    </section>
+
+    <dialog class="response">
+      <p class="message"></p>
+      <button class="okBtn modal-close">Ok</button>
+    </dialog>
+
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
