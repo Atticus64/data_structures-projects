@@ -2,8 +2,8 @@ import './style.css'
 import { Wrapper } from './result.js'
 const numbers = []
 
-for (let i = 1; i <= 7500 * 4; i++) {
-  if (i % 4 === 0) {
+for (let i = 1; i <= 7500 * 9; i++) {
+  if (i % 9 === 0) {
     numbers.push(i)
   }
 }
