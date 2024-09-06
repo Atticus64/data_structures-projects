@@ -13,8 +13,17 @@ document.querySelector('.numbers-card').innerHTML = `
 `
 
 const form = document.querySelector('.form')
-const input = document.querySelector('.input')
-const btn = document.querySelector('.btn')
+const dialog = document.querySelector('dialog')
+const btClose = document.querySelector('.modal-close')
+const msgBox = document.querySelector("p.message")
+const inc = document.querySelector("button.plus")
+const dec = document.querySelector("button.minus")
+const numSearch = document.querySelector("#numSearch")
+const STATUS = {
+  Ok: "success",
+  Err: "error"
+}
+let pos = -1
 
 /**
  * 
@@ -57,7 +66,7 @@ function binarySearch(collection, value) {
   if (!found) {
     result.setIsError(true)
     result.setValue({
-      error: `No se encontro el valor ${value}`,
+      error: `No se encontro el valor ${value} tuvo ${iterations} iteraciones`,
       iterations,
       data: value
     })
@@ -67,12 +76,6 @@ function binarySearch(collection, value) {
 
 }
 
-const dialog = document.querySelector('dialog')
-const btClose = document.querySelector('.modal-close')
-const inc = document.querySelector("button.plus")
-const dec = document.querySelector("button.minus")
-const numSearch = document.querySelector("#numSearch")
-let pos = -1
 
 inc.addEventListener('click', () => {
   numSearch.value = Number(numSearch.value) + 1
@@ -88,6 +91,21 @@ btClose.addEventListener('click', () => {
   dialog.close()
 })
 
+function openModal({ message, status }) {
+  msgBox.textContent = message
+  if (status === STATUS.Ok) {
+   const myCanvas = document.querySelector('.canvas');
+
+    var myConfetti = confetti.create(myCanvas, { resize: true });
+
+    myConfetti();
+  } else if (status === STATUS.Err) {
+
+  }
+
+  dialog.showModal()
+}
+
 form.addEventListener('submit', (e) => {
 
   const old = document.querySelector(`.num-${pos}`)
@@ -99,30 +117,38 @@ form.addEventListener('submit', (e) => {
   e.preventDefault()
 
   const data = Object.fromEntries(new FormData(e.target))
+
   const num = Number(data.number)
-  const msgBox = document.querySelector("p.message")
+  if (num < numbers[0]) {
+    openModal({
+      message: "Ese numero es menor al primer dato, ingresar otro",
+      status: STATUS.Err
+    })
+    return
+  }
+
 
   let searchData = binarySearch(numbers, num)
 
   if (searchData.isError()) {
     const { error } = searchData.unwrap()
-    msgBox.textContent = error
+    openModal({ 
+      message: error,
+      status: STATUS.Err 
+    }) 
+
   } else {
     const { iterations, position } = searchData.unwrap()
     const elem = document.querySelector(`.num-${position}`)
     elem.style.backgroundColor = "darkorange"
 
-    const myCanvas = document.querySelector('.canvas');
-
-    var myConfetti = confetti.create(myCanvas, { resize: true });
-
-    myConfetti();
 
     elem.scrollIntoView()
     pos = position
-
-    msgBox.textContent = `El dato esta en la posicion: ${position}
-                          con ${iterations} iteraciones`
+    openModal({ 
+      message: `El dato esta en la posicion: ${position} con ${iterations} iteraciones`,
+      status: STATUS.Ok 
+    }) 
   }
   dialog.showModal()
 
