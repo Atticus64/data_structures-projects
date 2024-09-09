@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vite App</title>
+</head>
+
+<body>
+  <wc-toast></wc-toast>
+  <section id="app">
+    <h1>Busqueda de Curp!</h1>
+    <form class="search-form">
+      <label for="search-input" class="sr-only">Search</label>
+      <div class="search-input-container">
+        <div class="search-icon-wrapper">
+          <svg class="search-icon" width="1rem" height="1rem" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+            viewBox="0 0 20 20">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z" />
+          </svg>
+        </div>
+        <input type="search" id="search-input" name="curp" class="search-input" placeholder="Ingresa una Curp."
+          required />
+        <button type="submit" class="search-button">Search</button>
+      </div>
+    </form>
+    <div class="table-container">
+      <table class="alum-tabla">
+      </table>
+    </div>
+    <dialog class="response">
+      <p class="message"></p>
+      <button class="okBtn">Ok</button>
+    </dialog>
+    <script type="module" src="/main.js"></script>
+    </sectionid>
+</body>
+
+</html>
