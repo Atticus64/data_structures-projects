@@ -95,5 +95,6 @@ closeBtn.addEventListener('click', () => {
 okBtn.addEventListener('click', () => {
   dialog.close()
 })
+
 fillPlacas(placas)
 fillCard(placas)
