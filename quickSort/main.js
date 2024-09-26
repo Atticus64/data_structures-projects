@@ -18,7 +18,7 @@ function randomNumber(min, max) {
 
 function fillNums(collection) {
   for (let i = 0; i < 25000; i++) {
-    collection[i] = randomNumber(1, 30000);
+    collection[i] = randomNumber(1, 999999);
   }
 }
 
@@ -35,6 +35,13 @@ function fillCard(collection) {
 fillNums(numbers);
 fillCard(numbers);
 
+/**
+ * 
+ * @param {number[]} arr 
+ * @param {number} low 
+ * @param {number} high 
+ * @returns {number} 
+ */
 function partition(arr, low, high) {
   let pivot = arr[low];
   let i = low;
@@ -66,6 +73,13 @@ function swap(array, i, j) {
   changes += 1;
 }
 
+/**
+ * 
+ * @param {number[]} array 
+ * @param {number} low 
+ * @param {number} high 
+ * @returns 
+ */
 function quickSort(array, low, high) {
   if (low < high) {
     let part = partition(array, low, high)
@@ -103,6 +117,8 @@ btnClose.addEventListener('click', () => {
 })
 
 shuffle.addEventListener("click", () => {
+  comparations = 0
+  changes = 0
 
   fillNums(numbers)
   fillCard(numbers);
