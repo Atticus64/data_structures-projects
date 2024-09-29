@@ -1,0 +1,44 @@
+[
+  {
+    "codigo": "99988800",
+    "descripcion": "BALERO CHEVROLET A150",
+    "precioUnitario": 42,
+    "piezas": 3,
+    "importe": 126
+  },
+  {
+    "codigo": "00012345",
+    "descripcion": "TORNILLO 3\" ROSCA EXTERIOR",
+    "precioUnitario": 19,
+    "piezas": 5,
+    "importe": 95
+  },
+  {
+    "codigo": "00000001",
+    "descripcion": "TORNILLO 4\" ROSCA INTERIOR",
+    "precioUnitario": 45,
+    "piezas": 7,
+    "importe": 315
+  },
+  {
+    "codigo": "12345500",
+    "descripcion": "BALATAS FRENO AUTO CHEVY",
+    "precioUnitario": 128,
+    "piezas": 2,
+    "importe": 256
+  },
+  {
+    "codigo": "00001234",
+    "descripcion": "TUERCA 5/8 ROSRA INTERIOR",
+    "precioUnitario": 18,
+    "piezas": 10,
+    "importe": 180
+  },
+  {
+    "codigo": "11567890",
+    "descripcion": "ABRAZADERA 1/2",
+    "precioUnitario": 3.5,
+    "piezas": 8,
+    "importe": 28
+  }
+]

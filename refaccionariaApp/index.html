@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Refaccionaria App</title>
+</head>
+
+<body>
+  <wc-toast></wc-toast>
+  <section id="app">
+
+    <h1>App Refaccionaria Inventario</h1>
+    <form class="form_inventario">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="cod_art">Código del Producto</label>
+          <input placeholder="00123131" id="cod_art" type="text" name="codigo" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Precio Unitario</label>
+          <input placeholder="250" id="prec_unit" type="number" name="precioUnitario" step="0.01" min="1" required>
+        </div>
+        <div class="form-group form-group--full">
+          <label for="last_name">Descripción del Producto</label>
+          <textarea required rows="2" cols="10" wrap="soft" style="overflow:auto; resize:none;" class="desc_input"
+            id="desc_art" type="text" name="descripcion">
+
+            </textarea>
+        </div>
+        <div class="form-group ">
+          <label for="visitors">Piezas Vendidas</label>
+          <input class="input_piezas" id="p_vend" type="number" required name="piezas">
+        </div>
+        <button type="submit" class="submit-btn">Submit</button>
+      </div>
+    </form>
+
+    <section class="menu">
+      <div class="select-area">
+        <label for="">Modo de ordenamiento</label>
+        <select name="ordenamiento" id="modeOrd" >
+          <option value="codigo">Codigo</option>
+          <option value="descripcion">Descripcion</option>
+          <option value="precioUnitario">Precio</option>
+        </select>
+
+        <button class="sort">
+          Ordenar
+        </button>
+      </div>
+
+      <div class="search-area">
+        <label for="">Buscar por palabra clave</label>
+        <input type="text" name="query" id="query">
+
+        <button class="search">Buscar</button>
+      </div>
+
+    </section>
+
+    <section class="table-container">
+      <table class="products-table">
+      </table>
+
+    </section>
+
+  </section>
+  <script type="module" src="/main.js"></script>
+</body>
+
+</html>
