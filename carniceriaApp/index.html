@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/meat.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carniceria App</title>
+</head>
+
+<body>
+  <wc-toast></wc-toast>
+  <section id="app">
+
+    <h1>App Carniceria Cajas</h1>
+    <div class="dropzone-container" id="target">
+      <label for="dropzone-file" class="dropzone-label" >
+        <div class="dropzone-content" draggable="true">
+          <svg class="dropzone-icon" width="1rem" height="1rem" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+            fill="none" viewBox="0 0 20 16">
+            <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2" />
+          </svg>
+          <p class="dropzone-text"><span class="font-semibold">Click para subir</span> o drag and drop your file</p>
+          <p class="dropzone-subtext">Sube un archivo txt con el formato correcto</p>
+        </div>
+        <input id="dropzone-file" type="file" class="hidden" accept=".txt" />
+      </label>
+    </div>
+
+    
+      <section class="table-container">
+        <table class="products-table">
+        </table>
+    
+      </section>
+  </section>
+
+  <div id="app"></div>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
