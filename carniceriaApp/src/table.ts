@@ -9,24 +9,36 @@ function getCells(data: string[], type: string) {
 }
 
 function createBody(data: Map<string, CargaArticulo>) {
-	//return data.forEachb(benef => `<tr>${getProps(benef, 'td')}</tr>`).join('');
 	const iterable = data.entries();
 	let html = '';
+  let totalCajas = 0
+  let totalKilos = 0
 
 	for (const [id, carga] of iterable) {
+    totalCajas += carga.nCajas
+    totalKilos += carga.peso
 		html += `<tr>
-    <td> ${carga.nCajas} </td>
     <td> ${id} </td>
+    <td> ${carga.nCajas} </td>
     <td> ${carga.nombre} </td>
-    <td> ${carga.peso.toFixed(3)} </td>
+    <td> ${carga.peso.toFixed(2)} </td>
     </tr>`;
 	}
+
+  html += `
+    <tr>
+      <td> <b> Total Cajas </b> </td>
+      <td> ${totalCajas} </td>
+      <td> <b> Total Kilos </b> </td>
+      <td> ${totalKilos.toFixed(2)} </td>
+    </tr>
+  `
 
 	return html;
 }
 
 function createTable(items: Map<string, CargaArticulo>) {
-	const titles = ['Cajas', 'Código', 'Producto', 'Kilos'];
+	const titles = ['Código', 'Cajas', 'Producto', 'Kilos'];
 
 	return `
       <thead>${getCells(titles, 'th')}</thead>
