@@ -2,7 +2,9 @@ import "./style.css";
 import { Stack } from "./stack";
 import { searchVehiculo, Vehiculo } from "./vehiculo";
 import {
+  fromArr,
 	getRandomColor,
+	overflowStack,
 	playSoundError,
 	updateMessageRemaining,
 	updateStackItems,
@@ -74,8 +76,8 @@ function busquedaProcess() {
 
 	const items = searchVehiculo(Estacionamiento, criterio, query);
 
-  status = "search"
-  updateMostrarStatus()
+	status = "search";
+	updateMostrarStatus();
 	updateStackItems(false, items);
 }
 
@@ -83,30 +85,28 @@ function updateMostrarStatus() {
 	const title = document.querySelector(".title-show");
 	if (!title || !mostrarBtn) return;
 
-  let valueTitle = "";
+	let valueTitle = "";
 	let btnValue = "";
 	if (status === "stack") {
-    valueTitle = "Elementos del Stack";
-    btnValue = "Mostrar Cima (último carro)";
-	} 
-  if (status === "top") {
-    valueTitle = "La cima del Stack";
-    btnValue = "Mostrar todos los elementos";
+		valueTitle = "Elementos del Stack";
+		btnValue = "Mostrar Cima (último carro)";
+	}
+	if (status === "top") {
+		valueTitle = "La cima del Stack";
+		btnValue = "Mostrar todos los elementos";
 	}
 
-  if (status === "search") {
+	if (status === "search") {
 		valueTitle = "Elementos de la Búsqueda";
 		btnValue = "Mostrar todos los elementos";
-  }
+	}
 
 	mostrarBtn.textContent = btnValue;
 	title.textContent = valueTitle;
 }
 
-
 desapilarBtn?.addEventListener("click", () => {
-
-  if (Estacionamiento.size() === 0) return
+	if (Estacionamiento.size() === 0) return;
 
 	Estacionamiento.pop();
 	updateMessageRemaining();
@@ -114,25 +114,26 @@ desapilarBtn?.addEventListener("click", () => {
 });
 
 mostrarBtn?.addEventListener("click", () => {
+	if (status === "search") status = "top";
 
-  if (status === "search") status = "top"
-
-  if (status === "stack") {
-    status = "top"
-  } else {
-    status = "stack"
-  }
-  
+	if (status === "stack") {
+		status = "top";
+	} else {
+		status = "stack";
+	}
 
 	updateMostrarStatus();
 	updateStackItems(status === "top", Estacionamiento);
-
-
 });
 
 form?.addEventListener("submit", (e: SubmitEvent) => {
 	e.preventDefault();
 	if (!e.target) return;
+
+	if (overflowStack()) {
+		playSoundError("No se pueden apilar más vehiculos");
+		return;
+	}
 
 	const formData = new FormData(e.target as HTMLFormElement);
 	const placas = formData.get("placas") as string;
@@ -149,9 +150,7 @@ form?.addEventListener("submit", (e: SubmitEvent) => {
 	const vh = new Vehiculo(placas, marca, modelo, color);
 	vh.cssColor = cssColor;
 	Estacionamiento.push(vh);
-	Estacionamiento.debug();
-
-	updateMessageRemaining();
+  updateMessageRemaining()
 
 	form.reset();
 
@@ -165,3 +164,124 @@ searchBtn?.addEventListener("click", () => {
 inputQuery?.addEventListener("keyup", (event) => {
 	if (event.key === "Enter") busquedaProcess();
 });
+
+const carros = [
+  {
+    placas: "MRS-8274",
+    modelo: "Hurricane Z7",
+    color: "Rojo",
+    marca: "Falcon"
+  },
+  {
+    placas: "LUX-9923",
+    modelo: "Stellar LX",
+    color: "Azul",
+    marca: "Solaris"
+  },
+  {
+    placas: "VXN-5412",
+    modelo: "Hurricane Z7",
+    color: "Negro",
+    marca: "Falcon"
+  },
+  {
+    placas: "ZJK-1198",
+    modelo: "Crystal Wave",
+    color: "Blanco",
+    marca: "Aurora"
+  },
+  {
+    placas: "RFD-7643",
+    modelo: "Phantom X5",
+    color: "Gris",
+    marca: "Vortex"
+  },
+  {
+    placas: "BQK-3042",
+    modelo: "Phantom X5",
+    color: "Verde",
+    marca: "Vortex"
+  },
+  {
+    placas: "JYP-6540",
+    modelo: "Pulse C3",
+    color: "Naranja",
+    marca: "Helios"
+  },
+  {
+    placas: "FWT-9082",
+    modelo: "Spectra 4000",
+    color: "Rojo",
+    marca: "Zenith"
+  },
+  {
+    placas: "XMD-3419",
+    modelo: "AeroV8",
+    color: "Amarillo",
+    marca: "SkyDrive"
+  },
+  {
+    placas: "GTR-6725",
+    modelo: "Stellar LX",
+    color: "Plata",
+    marca: "Solaris"
+  },
+  {
+    placas: "PKL-1138",
+    modelo: "Blaze V6",
+    color: "Negro",
+    marca: "Titan"
+  },
+  {
+    placas: "DHT-2250",
+    modelo: "Eclipse Q5",
+    color: "Azul",
+    marca: "Lunar"
+  },
+  {
+    placas: "BXT-9437",
+    modelo: "TurboMax",
+    color: "Gris",
+    marca: "Voltra"
+  },
+  {
+    placas: "QWE-1934",
+    modelo: "Vortex F2",
+    color: "Rojo",
+    marca: "Helios"
+  },
+  {
+    placas: "MNZ-8771",
+    modelo: "Spectra 3000",
+    color: "Verde",
+    marca: "Zenith"
+  },
+  {
+    placas: "LLK-7643",
+    modelo: "Hurricane X3",
+    color: "Blanco",
+    marca: "Falcon"
+  },
+  {
+    placas: "TRS-3319",
+    modelo: "Flash S1",
+    color: "Naranja",
+    marca: "Nova"
+  },
+  {
+    placas: "WWF-5555",
+    modelo: "Turbo G",
+    color: "Azul",
+    marca: "Voltra"
+  },
+  {
+    placas: "XTY-9212",
+    modelo: "Blaze S2",
+    color: "Amarillo",
+    marca: "Titan"
+  }
+]
+
+fromArr(carros)
+updateMessageRemaining()
+updateStackItems(false, Estacionamiento)

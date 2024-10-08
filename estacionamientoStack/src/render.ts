@@ -3,6 +3,8 @@ import { Estacionamiento } from "./main";
 import { Stack } from "./stack";
 import { Vehiculo } from "./vehiculo";
 
+const MAX = 20;
+
 const remainingSpaces = document.querySelector("p.size");
 export function playSoundError(message: string) {
 	toast.error(message);
@@ -26,15 +28,19 @@ export function fromArr(
 	}
 }
 
+const isMaxStack = (count: number) => (count - Estacionamiento.size()) === 0
+
+export function overflowStack() {
+  return isMaxStack(MAX)
+}
+
+
 export function updateMessageRemaining() {
 	if (!remainingSpaces) return;
-	const remaining = 20 - Estacionamiento.size();
+
+	const remaining = MAX - Estacionamiento.size();
 	if (remaining <= 0) {
 		remainingSpaces.textContent = "No hay campos disponibles";
-		if (remaining < 0) {
-			playSoundError("No se pueden apilar más vehiculos");
-			return;
-		}
 	} else {
 		remainingSpaces.textContent = `Campos disponibles ${remaining}`;
 	}
@@ -107,6 +113,7 @@ export function updateStackItems(onlyTop: boolean, stack: Stack<Vehiculo>) {
 
 	for (const vehiculo of stack.iter()) {
 		content += stackItem(vehiculo);
+    
 	}
 
 	itemsList.innerHTML = content;
