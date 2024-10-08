@@ -12,22 +12,6 @@ export function playSoundError(message: string) {
 	snd.play();
 }
 
-export function fromArr(
-	arr: {
-		placas: string;
-		marca: string;
-		modelo: string;
-		color: string;
-	}[],
-) {
-	for (const c of arr) {
-		const color = getRandomColor();
-		const vh = new Vehiculo(c.placas, c.marca, c.modelo, c.color);
-		vh.cssColor = color;
-		Estacionamiento.push(vh);
-	}
-}
-
 const isMaxStack = (count: number) => (count - Estacionamiento.size()) === 0
 
 export function overflowStack() {
