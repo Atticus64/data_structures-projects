@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/truck.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camiones de Maiz</title>
+</head>
+
+<body>
+  <wc-toast></wc-toast>
+  <section id="app">
+    <h2>Camiones de Maiz</h2>
+    <form class="form-camiones" id="truck_form">
+      <div class="form-grid">
+        <div class="form-group">
+          <label for="placas">Matrícula</label>
+          <input placeholder="00123131" id="v_placas" type="text" name="matricula" required>
+        </div>
+        <div class="form-group">
+          <label for="phone">Marca</label>
+          <input placeholder="Toyota" id="v_marca" type="text" name="marca" required>
+        </div>
+        <div class="form-group ">
+          <label for="visitors">Modelo</label>
+          <input placeholder="Corolla" id="v_modelo" type="text" required name="modelo">
+        </div>
+        <div class="form-group ">
+          <label for="visitors">Color</label>
+          <input placeholder="Azul" id="v_color" type="text" required name="color">
+        </div>
+        <div class="form-group ">
+          <label for="visitors">Nombre del Chofer</label>
+          <input placeholder="Juan Perez" id="n_chofer" type="text" required name="nombre">
+        </div>
+        <div class="form-group ">
+          <label for="visitors">Celular del chofer</label>
+          <input placeholder="6684 783456" id="t_celular" minlength="10" lang="es" maxlength="10" type="tel" required name="celular">
+        </div>
+        <!--<div class="form-group ">
+          <label for="visitors">Fecha de llegada</label>
+          <input id="fecha" type="datetime-local" required name="fecha">
+        </div>-->
+      </div>
+    </form>
+    <p class="size">Campos disponibles: 5</p>
+    <p class="items">Camiones encolados: 0</p>
+    <section class="menu">
+      <button form="truck_form" type="submit" class="submit-btn">Ingresar Camión</button>
+      <button class="dequeue">Desencolar camión</button>
+    </section>
+
+    <section class="info-truck">
+    </section>
+  </section>
+  <script type="module" src="/src/main.ts"></script>
+  <style>
+    body {
+      font-family: 'IBM Plex Sans', sans-serif;
+    }
+  </style>
+</body>
+
+</html>

@@ -1,0 +1,92 @@
+[
+        {
+                "nombre": "Laura",
+                "celular": "560 401 228",
+                "fecha": "2024-10-13T10:55:21.063Z",
+                "color": "turquesa",
+                "marca": "Mini",
+                "modelo": "Camry",
+                "matricula": "JF06AII"
+        },
+        {
+                "nombre": "Cristian",
+                "celular": "590.331.068",
+                "fecha": "2024-10-13T08:22:46.847Z",
+                "color": "cian",
+                "marca": "Volkswagen",
+                "modelo": "Model T",
+                "matricula": "VK68ULR"
+        },
+        {
+                "nombre": "María Eugenia",
+                "celular": "543 874 040",
+                "fecha": "2024-10-13T09:57:17.354Z",
+                "color": "marfil",
+                "marca": "Jeep",
+                "modelo": "XC90",
+                "matricula": "KX03KND"
+        },
+        {
+                "nombre": "Ximena Guadalupe",
+                "celular": "575.945.608",
+                "fecha": "2024-10-13T11:57:36.294Z",
+                "color": "Menta verde",
+                "marca": "Polestar",
+                "modelo": "Land Cruiser",
+                "matricula": "KW29BUS"
+        },
+        {
+                "nombre": "María Guadalupe",
+                "celular": "566760539",
+                "fecha": "2024-10-13T08:11:38.258Z",
+                "color": "oro",
+                "marca": "Audi",
+                "modelo": "Impala",
+                "matricula": "MZ22HZG"
+        },
+        {
+                "nombre": "Uriel",
+                "celular": "587 877 683",
+                "fecha": "2024-10-13T11:56:05.435Z",
+                "color": "plata",
+                "marca": "Audi",
+                "modelo": "Fortwo",
+                "matricula": "BO51BBO"
+        },
+        {
+                "nombre": "Concepción",
+                "celular": "5471-767-700",
+                "fecha": "2024-10-13T10:44:33.546Z",
+                "color": "aceituna",
+                "marca": "Kia",
+                "modelo": "Spyder",
+                "matricula": "JH90JPP"
+        },
+        {
+                "nombre": "Jerónimo",
+                "celular": "557.431.422",
+                "fecha": "2024-10-13T10:22:05.256Z",
+                "color": "gris",
+                "marca": "Volkswagen",
+                "modelo": "Jetta",
+                "matricula": "HP60XAW"
+        },
+        {
+                "nombre": "Monserrat",
+                "celular": "5519-348-973",
+                "fecha": "2024-10-13T11:10:50.634Z",
+                "color": "fucsia",
+                "marca": "Bentley",
+                "modelo": "Silverado",
+                "matricula": "QA93GGV"
+        },
+        {
+                "nombre": "Mario",
+                "celular": "513 138 912",
+                "fecha": "2024-10-13T10:15:52.027Z",
+                "color": "marfil",
+                "marca": "Smart",
+                "modelo": "Colorado",
+                "matricula": "HQ93PTU"
+        }
+]
