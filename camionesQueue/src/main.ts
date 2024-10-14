@@ -5,7 +5,7 @@ import "@fontsource/ibm-plex-sans/400-italic.css";
 //import { fromFile } from "./beta";
 import { Queue } from "./queue";
 import { Input, Truck } from "./truck";
-import { toast } from "wc-toast"
+import { toast } from "wc-toast";
 
 const $ = (selector: string) => document.querySelector(selector);
 const form: HTMLFormElement | null = document.querySelector(".form-camiones");
@@ -13,15 +13,19 @@ const dequeueBtn = document.querySelector("button.dequeue");
 export const cola = new Queue<Truck>({ limit: 25 });
 
 function contentTrucks() {
-  
 	const curr = cola.infoCurr();
 	const next = cola.infoNext();
- 
+
 	if (!curr)
 		return `
     <p>No hay Camiones encolados</p>
   `;
 
+	const dateFor = (fecha: string) => {
+    const dateObj = new Date(fecha);
+
+    return `${dateObj.toDateString()} - ${dateObj.toLocaleTimeString()}`;
+  }
 
 	if (!next) {
 		return `
@@ -33,6 +37,7 @@ function contentTrucks() {
         <p><b>Color:</b> ${curr.color} </p>
         <p><b>Chofer:</b> ${curr.nombre} </p>
         <p><b>Telefono:</b> ${curr.celular} </p>
+        <p><b>Fecha de llegada:</b> ${dateFor(curr.fecha)} </p>
       </div>    
     `;
 	}
@@ -46,6 +51,7 @@ function contentTrucks() {
         <p><b>Color:</b> ${curr.color} </p>
         <p><b>Chofer:</b> ${curr.nombre} </p>
         <p><b>Telefono:</b> ${curr.celular} </p>
+        <p><b>Fecha de llegada:</b> ${dateFor(curr.fecha)} </p>
       </div>    
     <div class="truck truck-next">
         <h3>Siguiente camión</h3>
@@ -54,6 +60,7 @@ function contentTrucks() {
           <p><b>Marca del Camión: </b> ${next.marca} </p>
           <p><b>Chofer:</b> ${next.nombre} </p>
           <p><b>Telefono:</b> ${next.celular} </p>
+          <p><b>Fecha de llegada:</b> ${dateFor(next.fecha)} </p>
         </div>
     </div>
   `;
@@ -63,39 +70,43 @@ function contentTrucks() {
 
 function showTrucks() {
 	const html = contentTrucks();
-  const items = cola.size();
+	const items = cola.size();
 
-  const currentSpace = $('.size')
-  const count = $('.items')
+	const currentSpace = $(".size");
+	const count = $(".items");
 	const layout = $(".info-truck");
 	if (!layout || !currentSpace || !count) return;
 
-  currentSpace.innerHTML = `Campos disponibles: ${cola.limit() - items}`
-  count.innerHTML = `Camiones encolados: ${cola.size()}`
+	currentSpace.innerHTML = `Campos disponibles: ${cola.limit() - items}`;
+	count.innerHTML = `Camiones encolados: ${cola.size()}`;
 	layout.innerHTML = html;
 }
 
 function invalidTruck(input: Input) {
-  for (const entrie of Object.entries(input)) {
-    if (entrie[1] === "") {
-      return {
-        error: `El campo ${entrie[0]} esta vacío`,
-        invalid: true
-      }
-    }
-  }
+	for (const entrie of Object.entries(input)) {
+		if (entrie[1] === "") {
+			return {
+				error: `El campo ${entrie[0]} esta vacío`,
+				invalid: true,
+			};
+		}
+	}
 
-  if (Number.isNaN(Number(input.celular))) {
-    return {
-      error: "El campo de Celular no es un número",
-      invalid: true
-    }
-  }
+	if (Number.isNaN(Number(input.celular))) {
+		return {
+			error: "El campo de Celular no es un número",
+			invalid: true,
+		};
+	}
 
-  return {
-    error: null,
-    invalid: false
-  }
+	return {
+		error: null,
+		invalid: false,
+	};
+}
+function newDate() {
+    const d = new Date();
+    return d.toISOString();
 }
 
 form?.addEventListener("submit", (e) => {
@@ -103,6 +114,7 @@ form?.addEventListener("submit", (e) => {
 
 	const formData = new FormData(e.target as HTMLFormElement);
 	const parse = (key: string) => formData.get(key)?.toString().trim();
+  
 	const input = {
 		matricula: parse("matricula") ?? "",
 		marca: parse("marca") ?? "",
@@ -110,35 +122,34 @@ form?.addEventListener("submit", (e) => {
 		color: parse("color") ?? "",
 		nombre: parse("nombre") ?? "",
 		celular: parse("celular") ?? "",
-		fecha: new Date().toISOString(),
+		fecha: newDate()
 	};
 
-  const { invalid, error  } = invalidTruck(input)
-  if (invalid) {
-    toast.error(error ?? "Los datos son invalidos")
-    return;
-  }
+	const { invalid, error } = invalidTruck(input);
+	if (invalid) {
+		toast.error(error ?? "Los datos son invalidos");
+		return;
+	}
 
-  if (cola.isFull()) {
-    toast.error("La cola de camiones esta llena!")
-    return;
-  }
+	if (cola.isFull()) {
+		toast.error("La cola de camiones esta llena!");
+		return;
+	}
 
 	const last = new Truck(input);
 	cola.insert(last);
-  toast.success(`Camión ${last.matricula} encolado!`)
+	toast.success(`Camión ${last.matricula} encolado!`);
 	showTrucks();
 });
 
 dequeueBtn?.addEventListener("click", () => {
-
-  if (cola.isEmpty()) {
-    toast.error("No hay camiones encolados");
-    return;
-  }
+	if (cola.isEmpty()) {
+		toast.error("No hay camiones encolados");
+		return;
+	}
 
 	const elem = cola.dequeue();
-  toast.success(`Camión ${elem.matricula} desencolado!`)
+	toast.success(`Camión ${elem.matricula} desencolado!`);
 	showTrucks();
 });
 
