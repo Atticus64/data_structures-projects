@@ -35,7 +35,7 @@ export class LinkedList<T> {
 
 	push(value: T) {
 		if (this.length === this.#limit) {
-			return ERROR("Cola enlazada llena");
+			return ERROR("Lista enlazada llena");
 		}
 
 		if (this.root === null || this.length === 0) {
@@ -57,7 +57,7 @@ export class LinkedList<T> {
 
 	unshift(val: T) {
 		if (this.length === this.#limit) {
-			return ERROR("Cola enlazada llena");
+			return ERROR("Lista enlazada llena");
 		}
 		const curr = this.root;
 
@@ -70,7 +70,7 @@ export class LinkedList<T> {
 
 	insert(value: T, index: number) {
 		if (this.length === this.#limit) {
-			return ERROR("Cola enlazada llena");
+			return ERROR("Lista enlazada llena");
 		}
 
 		if (index > this.length) {
@@ -103,7 +103,7 @@ export class LinkedList<T> {
 
 	insertBefore(data: T, search: string) {
 		if (this.length === this.#limit) {
-			return ERROR("Cola enlazada llena");
+			return ERROR("Lista enlazada llena");
 		}
 
 		if (this.root === null) {
@@ -124,7 +124,7 @@ export class LinkedList<T> {
 				const nuevo = new Node(data, curr.next);
 				curr.next = nuevo;
 				this.length += 1;
-				return OK(`Se inserto el ${data} antes de ${curr.value}`);
+				return OK(`Se inserto el ${data} antes de ${curr.next.value}`);
 			}
 			curr = curr.next;
 		}
@@ -136,7 +136,7 @@ export class LinkedList<T> {
 
 	insertAfter(data: T, search: string) {
 		if (this.length === this.#limit) {
-			return ERROR("Cola enlazada llena");
+			return ERROR("Lista enlazada llena");
 		}
 
 		if (this.root === null) {

@@ -7,7 +7,7 @@ const arrow = `
   <path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
     stroke-width="1.5"
     d="M12 4.5v15m0 0l-6-5.625m6 5.625l6-5.625" />
-</svg>`
+</svg>`;
 const form: HTMLFormElement | null = document.querySelector("#list-menu");
 const commands: HTMLSelectElement | null = document.querySelector("#command");
 const List = new LinkedList<string>(10);
@@ -23,6 +23,12 @@ const ACTIONS = {
 	REMOVE: "remove-elem",
 	ITER: "iter",
 };
+
+const InputErr = (msg: string) => ({
+	info: null,
+	is_err: true,
+	error: msg,
+});
 
 interface Info {
 	data: string | null;
@@ -62,17 +68,34 @@ export function getColor(i: number) {
 const validInput = (input: FormData) => {
 	if (input.get("command") !== null) {
 		const commands = Object.values(ACTIONS);
-		const data = input.get("data") as string;
+		const inputData = input.get("data") as string | null;
 		const action = input.get("command") as string;
 
 		if (!commands.includes(action)) {
-			return {
-				input: null,
-				is_err: true,
-				err: "No existe esa accion",
-			};
+			return InputErr("No existe esa accion");
 		}
-		const argument = input.get("argument") as string;
+
+		const req = requirementsAction(action);
+		const typeAct = typeAction(action);
+
+		let data: string | null = null;
+		if (req.data) {
+			if (!inputData || inputData.trim() === "") {
+			  return InputErr(`No hay un dato a ${typeAct}`);
+			}
+			data = inputData.trim();
+		}
+
+		const inputArgument = input.get("argument") as string | null;
+    
+		let argument: string | null = null;
+		if (req.args) {
+      if (!inputArgument || inputArgument.trim() === "") {
+			  return InputErr("No hay un dato como argumento");
+			}
+			argument = inputArgument.trim();
+		}
+
 		const info: Info = {
 			data,
 			action,
@@ -82,14 +105,14 @@ const validInput = (input: FormData) => {
 		return {
 			info,
 			is_err: false,
-			err: null,
+			error: null,
 		};
 	}
 
 	return {
-		input: null,
+		info: null,
 		is_err: true,
-		err: "Input invalido",
+		error: "Input invalido",
 	};
 };
 
@@ -314,6 +337,8 @@ commands?.addEventListener("change", (event) => {
 	desc.textContent = `Dato a ${typeAction(action)}`;
 	dataInput.disabled = true;
 	argInput.disabled = true;
+  dataInput.value = ""
+  dataInput.value = ""
 
 	if (req.data) {
 		dataInput.disabled = false;
@@ -330,7 +355,11 @@ form?.addEventListener("submit", (e) => {
 	const formData = new FormData(e.target as HTMLFormElement);
 	const res = validInput(formData);
 
-	if (!res.info) return;
+  if (res.is_err || !res.info) {
+    toast.error(res.error ?? "Input invalido");
+    return;
+  }
+
 
 	executeAction(res.info);
 	if (
