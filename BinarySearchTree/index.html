@@ -1,0 +1,49 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/algorithm.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Arbol binario de búsqueda</title>
+</head>
+
+<body>
+  <wc-toast></wc-toast>
+  <section id="app">
+    <h1>Arbol Binario de Búsqueda</h1>
+    <form id="tree-menu">
+      <div class="input-container">
+        <label for="data" class="desc">Dato a ingresar</label>
+        <input type="text" name="data" required id="data">
+      </div>
+      <div class="input-container">
+        <label for="command">Acción a realizar</label>
+        <select name="command" id="command">
+          <option value="insert">Añadir elemento</option>
+          <option value="search">Buscar</option>
+          <option value="delete">Eliminar elemento</option>
+          <option value="inorden">Inorder</option>
+          <option value="preorden">Preorden</option>
+          <option value="postorden">Postorden</option>
+        </select>
+      </div>
+      <div class="input-container">
+        <label for="argument">Argumento</label>
+        <input type="text" name="argument" disabled required id="argument">
+      </div>
+      <button type="submit" class="action" >Ejecutar operación</button>
+    </form>
+
+    <section class="tree-container">
+
+    </section>
+    <div class="result">
+        
+    </div>
+  </section>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>
